@@ -18,24 +18,18 @@
  * @return {boolean}
  */
 var isSameTree = function (p, q) {
-  let res = true;
   const dfs = (p, q) => {
-    if ((!p && q) || (p && !q)) {
-      res = false;
-      return;
-    }
     if (!p && !q) {
-      return;
+      return true;
     }
-    console.log(p.val, q.val);
+    if (!p || !q) {
+      return false;
+    }
     if (p.val !== q.val) {
-      res = false;
-      return;
+      return false;
     }
-    dfs(p.left, q.left);
-    dfs(p.right, q.right);
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
   };
-  dfs(p, q);
-  return res;
+  return dfs(p, q);
 };
 // @lc code=end
